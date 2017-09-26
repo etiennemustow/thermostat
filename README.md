@@ -1,0 +1,1 @@
+FizzBuzz written in Javascript.
