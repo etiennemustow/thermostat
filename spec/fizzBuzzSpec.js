@@ -14,12 +14,28 @@ describe('FizzBuzz', function() {
       expect(fizzBuzz.play(6)).toEqual('Fizz')
     });
   });
+
   describe('multiples of 5', function() {
-    it('fizzes for 5', function() {
+    it('buzzes for 5', function() {
       expect(fizzBuzz.play(5)).toEqual('Buzz');
     });
-    it('fizzes for 20', function() {
+    it('buzzes for 20', function() {
       expect(fizzBuzz.play(20)).toEqual('Buzz')
+    });
+  });
+
+  describe('multiples of 15', function() {
+    it('fizzbuzzes for 5', function() {
+      expect(fizzBuzz.play(15)).toEqual('FizzBuzz');
+    });
+    it('fizzbuzzeses for 30', function() {
+      expect(fizzBuzz.play(30)).toEqual('FizzBuzz')
+    });
+  });
+
+  describe('other numbers', function() {
+    it('shows number for other numbers', function() {
+      expect(fizzBuzz.play(2)).toEqual(2);
     });
   });
 
