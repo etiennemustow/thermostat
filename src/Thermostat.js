@@ -13,12 +13,13 @@ this.PowerSavingMode = true;
 
 }
 
-Thermostat.prototype.defaultTemp = function() {
-  return this.temp;
+Thermostat.prototype.resetTemp = function() {
+  return this.temp = 20;
 };
 
-Thermostat.prototype.startTemp = function(number) {
-  this.temp = number
+Thermostat.prototype.showTemp = function(number) {
+ var temperature = number || DEFAULT_TEMP;
+ this.temp = temperature
   return this.temp
 }
 

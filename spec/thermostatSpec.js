@@ -6,15 +6,15 @@ describe('Thermostat', function() {
       myThermostat = new Thermostat();
     })
 
-    describe('defaultTemp', function () {
-      it("returns default temperature", function() {
-      expect(myThermostat.defaultTemp()).toEqual(20);
+    describe('showTemp', function () {
+      it("shows temperature as 20 as default", function() {
+      expect(myThermostat.showTemp()).toEqual(20);
     })
   })
 
-    describe('startTemp', function() {
-      it("sets starting temperature", function() {
-        expect(myThermostat.startTemp(30)).toEqual(30);
+    describe('reset temperature', function() {
+      it("resets temperature of thermostat", function() {
+        expect(myThermostat.resetTemp()).toEqual(20);
       })
     })
 
@@ -26,7 +26,7 @@ describe('Thermostat', function() {
 
     describe('decreaseTemp', function() {
       it("decreases temperature by x", function() {
-        myThermostat.startTemp(30)
+        myThermostat.showTemp(30)
         expect(myThermostat.decreaseTemp(5)).toEqual(25);
       })
     })
