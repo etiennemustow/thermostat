@@ -1,15 +1,15 @@
 'use strict'
 
+const MAX_LIMIT_PSM_ON = 25
+const MAX_LIMIT_PSM_OFF = 32
+const MEDIUM_ENERGY_USAGE_LIMIT1 = 18
 const DEFAULT_TEMP = 20;
 const MINIMUM_TEMP = 10
 var err1 = Error('Temperature is too low')
-var err2 = Error('Power Saving Mode is on: Maximum tempeature is 25 degrees')
-var err3 = Error('Maximum temperature is 32 degrees')
 
 function Thermostat() {
 this.temp = DEFAULT_TEMP
 this.PowerSavingMode = true;
-
 
 }
 
@@ -24,19 +24,20 @@ Thermostat.prototype.showTemp = function(number) {
 }
 
 Thermostat.prototype.increaseTemp = function(number) {
-  if ((this.PowerSavingMode != true) && (this.temp + number > 32)) {
-      return err3;
-  } else if ((this.PowerSavingMode = true) && (this.temp + number > 25)) {
-      return err2
-  } else {
-      return this.temp += number
-  };
+ if (this.PowerSavingMode === true && this.temp + number > 25) {
+   return this.temp = 25
+ } if (this.PowerSavingMode !== true && this.temp + number > 32) {
+   return this.temp = 32
+ } else {
+  return this.temp += number
 }
+}
+
 
 
 Thermostat.prototype.decreaseTemp = function(number) {
   if (this.temp - number < MINIMUM_TEMP) {
-    return err1
+    return err1; this.temp = MINIMUM_TEMP
   } else {
     return this.temp -= number
   };
@@ -52,4 +53,22 @@ Thermostat.prototype.switchPowerSavingModeOff = function() {
 
 Thermostat.prototype.switchPowerSavingModeOn = function() {
   return this.PowerSavingMode = true;
+}
+
+//Thermostat.prototype.isMaximumTemperature = function() {
+//  if (this.isPowerSavingModeOn() === false) {
+//    return this.temp === MAX_LIMIT_PSM_OFF
+//  }
+//  return this.temp === this.MAX_LIMIT_PSM_ON
+//}
+
+Thermostat.prototype.energyUsage = function(){
+  console.log(this.temp)
+    if (this.temp < MEDIUM_ENERGY_USAGE_LIMIT1){
+     return 'low-usage'
+  } if (this.temp > MEDIUM_ENERGY_USAGE_LIMIT1 && this.temp < 25){
+      return 'medium-usage'
+  } else {
+  return 'high-usage'
+}
 }

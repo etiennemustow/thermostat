@@ -51,7 +51,7 @@ describe('Thermostat', function() {
 
     describe('when PowerSavingMode is on', function() {
       it('has a maximum of temperature of 25 degrees', function() {
-        expect(myThermostat.increaseTemp(6)).toEqual(Error('Power Saving Mode is on: Maximum tempeature is 25 degrees'))
+        expect(myThermostat.increaseTemp(6)).toEqual(25)
       })
     })
 
@@ -59,7 +59,28 @@ describe('Thermostat', function() {
       it('has a maximum of temperature of 32 degrees', function() {
         myThermostat.switchPowerSavingModeOff()
         expect(myThermostat.isPowerSavingModeOn()).toBe(false)
-        expect(myThermostat.increaseTemp(13)).toEqual(Error('Maximum temperature is 32 degrees'))
+        expect(myThermostat.increaseTemp(13)).toEqual(32)
+      })
+    })
+
+    describe('displaying energy usage levels', function(){
+      describe('when the temperature is below 18 degrees', function(){
+        it('it is considered low-usage', function(){
+          myThermostat.decreaseTemp(3)
+          expect(myThermostat.energyUsage()).toEqual('low-usage')
+        })
+      })
+      describe('when the temperature is between 18 and 25 degrees', function(){
+        it('it is considered medium-usage', function(){
+          expect(myThermostat.energyUsage()).toEqual('medium-usage')
+        })
+      })
+      describe('when the temperature is anything else', function(){
+        it('it is considered high-usage', function(){
+          myThermostat.switchPowerSavingModeOff()
+          myThermostat.increaseTemp(7)
+          expect(myThermostat.energyUsage()).toEqual('high-usage')
+        })
       })
     })
 
